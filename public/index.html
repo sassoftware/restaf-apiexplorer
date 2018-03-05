@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<!--
+  ~ /* ------------------------------------------------------------------------------------
+  ~  * Copyright (c) SAS Institute Inc.
+  ~  *  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  * you may not use this file except in compliance with the License.
+  ~  * You may obtain a copy of the License at
+  ~  *
+  ~  * http://www.apache.org/licenses/LICENSE-2.0
+  ~  *
+  ~  *  Unless required by applicable law or agreed to in writing, software
+  ~  * distributed under the License is distributed on an "AS IS" BASIS,
+  ~  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  * See the License for the specific language governing permissions and
+  ~ * limitations under the License.
+  ~ ----------------------------------------------------------------------------------------*/
+  ~
+  -->
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://unpkg.com/babel-core@5.8.38/browser.min.js"></script>
+
+    <!-- this brings in the raf library and app related info via config.js  -->
+    <script src="https://unpkg.com/restaf/dist/restaf.min.js"></script>
+    <script type="text/javascript" src="/shared/showAlert.js "></script>
+    <style>
+        .elabel{
+        display: inline-block;
+        float: left;
+        clear: left;
+        width: 250px;
+        text-align: right;
+        }
+        .einput {
+        display: inline-block;
+        float: left;
+        }
+    </style>
+
+</head>
+<body>
+<script>
+    let store = restaf.initStore();
+    function explore() {
+        let payload = {
+            host        : document.getElementById( 'host' ).value,
+            clientID    : document.getElementById( 'clientid' ).value,
+            redirect    : 'apiexplorer.html',
+            authType    : 'implicit',
+        };
+        debugger;
+        if ( payload.host.length > 0 && payload.clientID.length > 0 ) {
+            debugger;
+            store.logon( payload )
+                 .then( msg => console.log( msg ) )
+                 .catch( err => {
+                     debugger;
+                     showAlert( err )
+                 } )
+        } else {
+            showAlert( {Note: 'Insufficient information supplied' } );
+        }
+    }
+
+</script>
+<h1> Please enter your Server Information </h1>
+
+<div>
+        <label class="elabel">Viya Server: </label><input class="einput" type="url" id="host"
+                                            placeholder="http://mycoolViya.com" size="50">
+            <p>&nbsp;</p>
+        <label class="elabel">Client ID: </label><input class="einput" type="text" id="clientid"
+                                           placeholder="myClientID" size="50">
+            <p>&nbsp;</p>
+        <input class="einput" type="button" id="Explore" value="Explore" onclick="explore()" />
+
+</div>
+
+
+<div>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p> The Client Id must be defined to have no callback</p>
+    <p> Important for your server to have CORS enabled ( see SAS Environment
+    Manager)</p>
+</div>
+
+</body>
+</html>
