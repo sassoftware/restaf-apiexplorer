@@ -31,29 +31,15 @@ you should logon as administrator to Environment Manager and do the following:
 
 
 2. Ask your system administrator to give you a clientid and clientSecret appropriate
-for implicit flow with no callback.
+for implicit flow with no callback or a password flow.
 
-     TBD: Add support for password flow to this application - restaf supports that flow also.
-
-### Creating env file
-Copy the apiexplorer.env file to some location.
-Edit apiexplorer.env file and follow the instructions in the file.
-Key values to set:
-
-1. VIYA_SERVER
-2. CLIENTID
-3. CLIENTSECRET
 
 ## Running the application
 ```
-npm start <env file>
-
-ex: let us say you saved the myenv file one level above the project directory
-npm start ../myenv.file
-```
+npm start
 
 Now visit the site indicated in the console and follow the instructions.
-
+```
 
 ## Warning
-The available services depend on what has been installed on the server.
+The list of available services depends on what has been installed on the server.
