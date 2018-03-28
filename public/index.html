@@ -31,6 +31,7 @@
     <link rel="stylesheet" type="text/css" href="/shared/raf.css">
 
 
+
     <style>
         .container {
             display: flex;
@@ -39,15 +40,15 @@
             min-height: 800px;
         }
         .elabel{
-        display: inline-block;
-        float: left;
-        clear: left;
-        width: 250px;
-        text-align: right;
+            display: inline-block;
+            float: left;
+            clear: left;
+            width: 250px;
+            text-align: right;
         }
         .einput {
-        display: inline-block;
-        float: left;
+            display: inline-block;
+            float: left;
         }
         .div1 {
             border: 1px solid black;
@@ -66,136 +67,82 @@
 <script>
     let store = restaf.initStore();
     function explore() {
-        let v = document.querySelector('input[name="flow"]:checked').value;
         let s = document.getElementById('clientsecret').value;
         let clientSecret = (s.length > 0) ? s : '';
-        if ( v === 'Implicit') {
-            let payload = {
-                host        : document.getElementById('host').value,
-                clientID    : document.getElementById('clientid').value,
-                clientSecret: clientSecret,
-                redirect    : 'apiexplorer.html',
-                authType    : 'implicit',
-            };
-            debugger;
-            if (payload.host.length > 0 && payload.clientID.length > 0) {
-                debugger;
-                store.logon(payload)
-                     .then(msg => console.log(msg))
-                     .catch(err => {
-                         debugger;
-                         showAlert(err)
-                     })
-            } else {
-                showAlert({Note: 'Insufficient information supplied'});
-            }
-        } else {
-            showExplorer( );
-        }
-    }
-
-    let exploreb = explore.bind(this);
-    function showExplorer() {
-        let v = document.getElementById('clientsecret').value;
-        let clientSecret = (v.length > 0) ? v : '';
         let payload = {
             host        : document.getElementById('host').value,
             clientID    : document.getElementById('clientid').value,
             clientSecret: clientSecret,
-            user        : document.getElementById('user').value,
-            password    : document.getElementById('password').value,
-            redirect    : 'apiexplorer.html',
-            authType    : 'password',
+            redirect    : 'apiexplorer/main.html',
+            authType    : 'implicit',
         };
-        store.logon(payload)
-             .then( msg => {
-                 let props = {
-                     store: store
-                 };
-                 rafuip.Explore( props, "#container" );
-             } )
-             .catch ( err => {
-                 showAlert( err );
-             })
-    }
-
-    function authType (elem) {
-        let v = document.querySelector('input[name="flow"]:checked').value;
-        if ( v === 'Password') {
-            document.getElementById('user').disabled = false;
-            document.getElementById('password').disabled = false;
+        if (payload.host.length > 0 && payload.clientID.length > 0) {
+            store.logon(payload)
+                 .then(msg => console.log(msg))
+                 .catch(err => {
+                     showAlert(err)
+                 })
         } else {
-            document.getElementById('user').disabled = true;
-            document.getElementById('password').disabled = true;
+            showAlert({Note: 'The server URL and clientID are required'});
         }
+
     }
+    let exploreb = explore.bind(this);
 </script>
 
 
 <div id="container">
     <div id="rafuip-main-content">
 
-    <h1> apiExplorer built with restAF</h1>
-    <h2> Please enter your Server Information </h2>
-    <div class="rafuip-content">
-        <p> Please specify your SAS Viya Server and type of authentication</p>
-        <form action="">
-            <label class="elabel">Viya Server: </label><input class="einput" type="url" id="host"
-                                                              placeholder="http://mycoolViya.com" size="50">
-            <br>
-            <p> Please Select Authentication Method</p>
-            <input checked type="radio" id="passwordFlow" name="flow" onclick="authType(this)" value="Password"> <label for="passwordFlow">Password Flow</label>
-            <br>
-            <input id="implicitFlow" type="radio" name="flow"  onclick="authType(this)" value="Implicit"> <label for="implicitFlow">Implicit Flow</label>
-
-        </form>
-    </div>
-    <div>
-    <p>&nbsp;</p>
+        <h1> apiExplorer built with restAF</h1>
+        <h2> Please enter your Server Information </h2>
+        <div class="rafuip-content">
+            <p> Please specify your SAS Viya Server and clientId and clientSecret</p>
+            <form action="">
+                <label class="elabel">Viya Server: </label><input class="einput" type="url" id="host"
+                                                                  placeholder="http://mycoolViya.com" size="50">
+            </form>
         </div>
-    <div class="rafuip-content">
-        <form action="">
-            <label class="elabel">Client ID: </label><input class="einput" type="text" id="clientid"
-                                                                              size="50">
+        <div>
             <p>&nbsp;</p>
-            <label class="elabel">Client Secret: </label><input class="einput" type="text" id="clientsecret"
-                                                             size="50">
+        </div>
+        <div class="rafuip-content">
+            <form action="">
+                <label class="elabel">Client ID: </label><input class="einput" type="text" id="clientid"
+                                                                size="50">
+                <p>&nbsp;</p>
+                <label class="elabel">Client Secret: </label><input class="einput" type="text" id="clientsecret"
+                                                                    size="50">
+            </form>
+
+
+        </div>
+        <div>
             <p>&nbsp;</p>
-            <label class="elabel">User: </label><input class="einput" type="text" id="user"
-                                                                size="50" >
+            <form>
+                <input type="button" id="explore" value="Explore" onclick="exploreb()" >
+            </form>
+        </div>
+
+        <div>
             <p>&nbsp;</p>
-            <label class="elabel">Password: </label><input class="einput" type="password" id="password"
-                                                              size="50" >
-        </form>
+            <h2> Important Usage Note</h2>
 
+            <ul>
+                <li> Ask your system administrator to enable CORS using the SAS Environment Manager. If you own the server
+                    you should logon as administrator to Environment Manager and do the following:</li>
 
-    </div>
-    <div>
-        <p>&nbsp;</p>
-        <form>
-            <input type="button" id="explore" value="Explore" onclick="exploreb()" >
-        </form>
-    </div>
-
-    <div>
-        <p>&nbsp;</p>
-        <h2> Important Usage Note</h2>
-
-    <ul>
-       <li> Ask your system administrator to enable CORS using the SAS Environment Manager. If you own the server
-        you should logon as administrator to Environment Manager and do the following:</li>
-
-        <ul>
-            <li>configuration ->(Definitions from the view dropdown)</li>
-        <li>Select sas.commons.web.security.  Make sure allowedHeaders, allowedMethods and AllowedOrigin are set to * or some whitelist</li>
-    </li>
-    </ul>
-        <li>Ask your system administrator for a clientid and clientsecret. Depending on your company policies this will be either for password flow or implicit flow
-             </li>
+                <ul>
+                    <li>configuration ->(Definitions from the view dropdown)</li>
+                    <li>Select sas.commons.web.security.  Make sure allowedHeaders, allowedMethods and AllowedOrigin are set to * or some whitelist</li>
+                    </li>
+                </ul>
+                <li>Ask your system administrator for a clientid and clientsecret  for implicit OAuth2 flow.
+                </li>
             </ul>
-    </div>
+        </div>
 
-</div>
+    </div>
 </div>
 </body>
 </html>

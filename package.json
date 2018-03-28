@@ -1,12 +1,12 @@
 {
   "name": "rest-apiexplorer",
   "version": "0.2.0",
-  "description": "a SAS API explorer built with restaf and open source tools",
-  "main": "index.js appserver.env",
+  "description": "a SAS API explorer built with restaf",
+  "main": "index.js",
   "author": "Deva Kumaraswamy <deva.kumar@sas.com>",
   "license": "SEE LICENSE IN license.txt",
   "keywords": [
-    "rAF",
+    "restAF",
     "SAS VIYA",
     "REST API"
   ],
