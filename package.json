@@ -11,8 +11,8 @@
     "REST API"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node index.js apiexplorer.env"
+    "start": "node index.js apiexplorer.env",
+    "proxy": "node index.js"
   },
   "repository": {
     "type": "git",

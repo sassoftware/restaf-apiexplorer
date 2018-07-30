@@ -31,9 +31,16 @@ you should logon as administrator to Environment Manager and do the following:
 
 
 2. Ask your system administrator to give you a clientid and clientSecret appropriate
-for implicit flow with no callback or a password flow.
+for implicit flow with the following callback
+  
+     http://<appmachine>:<appport>/apiexplorer/main.html
 
 
+The appport is from the apiexplorer.env file
+
+The appmachine is where you are running this app (ex: http://mydesktop:5008/apiexplorer.html)
+
+T
 ## Running the application
 ```
 npm start
@@ -42,4 +49,4 @@ Now visit the site indicated in the console and follow the instructions.
 ```
 
 ## Warning
-The list of available services depends on what has been installed on the server.
+The list of available services depends on what has been installed on the server. So do not depend on it - Type it in.

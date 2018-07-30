@@ -19,13 +19,6 @@
 'use strict';
 
 let rafserver = require ( 'restaf-server' );
-debugger;
-let rafEnv = ( process.argv.length === 3 ) ? process.argv [ 2 ] : null;
-if ( rafEnv === null ) {
-    console.log( 'Please specify an env file' );
-    process.exit( 0 );
-} else {
-    console.log( `env file is: ${rafEnv}` );
-    rafserver.UIapp( null, null, rafEnv );
-}
-
+let rafEnv = ( process.argv.length === 3 ) ? process.argv [ 2 ] : null ;
+console.log( (rafEnv === null) ? 'NOTE: Using settings from environment variables': `NOTE: env file is: ${rafEnv}` );
+rafserver.UIapp( null, null, rafEnv );
