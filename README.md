@@ -20,7 +20,9 @@ npm install
 ```
 
 ## Configure the app
+
 ### Server setup
+
 To run this application you need to do the following:
 
 1. Ask your system administrator to enable CORS using the SAS Environment Manager. If you own the server

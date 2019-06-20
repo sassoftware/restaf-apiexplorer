@@ -19,7 +19,7 @@
     "url": "https://github.com/sassoftware/restaf-apiexplorer.git"
   },
   "dependencies": {
-    "restaf-server": "latest"
+    "restaf-server": "^6.9.1"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1"
