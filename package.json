@@ -1,6 +1,6 @@
 {
   "name": "rest-apiexplorer",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "a SAS API explorer built with restaf",
   "main": "index.js",
   "author": "Deva Kumaraswamy <deva.kumar@sas.com>",
