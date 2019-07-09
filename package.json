@@ -11,7 +11,8 @@
     "REST API"
   ],
   "scripts": {
-    "start": "node index.js apiexplorer.env",
+    "app": "node index.js apiexplorer.env",
+    "start": "npx restaf-server --env=apiexplorer.env",
     "proxy": "node index.js"
   },
   "repository": {
@@ -19,7 +20,7 @@
     "url": "https://github.com/sassoftware/restaf-apiexplorer.git"
   },
   "dependencies": {
-    "restaf-server": "^6.9.1"
+    "restaf-server": "^6.11.0"
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1"
