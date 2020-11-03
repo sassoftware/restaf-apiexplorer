@@ -1,4 +1,4 @@
-# restaf-apiexplorer
+# [ARCHIVED] restaf-apiexplorer
 
 An useful application to explore SAS REST APIs. This is also a great example of using restaf
 to build a medium-sized application.
